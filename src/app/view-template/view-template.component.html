@@ -1,1 +1,35 @@
-<p>view-template works!</p>
+<!-- <div>
+  {{this.scale}}
+  {{this.createTemplateService.currentWidth}}
+  {{this.createTemplateService.currentHeight}}
+</div> -->
+<div #eleViewParent [ngStyle]="{
+  'aspect-ratio': this.viewTemplateService.background.scale,
+  width: this.viewTemplateService.background.scale === typeScreen.PC ? '100%' :'auto',
+  height: this.viewTemplateService.background.scale === typeScreen.PC ? 'auto' :'100%',
+  overflow: 'hidden'
+}">
+  <div class='view' [style]="{
+    'background-color': 'white',
+    position: 'relative',
+    'user-select': 'none'
+  }" #eleView [ngStyle]="{
+    'aspect-ratio': this.viewTemplateService.background.scale,
+    width: this.viewTemplateService.background.scale === typeScreen.PC ? '100%' :'auto',
+    height: this.viewTemplateService.background.scale === typeScreen.PC ? 'auto' :'100%'
+  }">
+    <img [style]="{
+      width: '100%',
+      height: '100%'
+    }" [src]="this.viewTemplateService.background.url" alt="" draggable='false'>
+    <ng-container *ngIf="scale">
+      <ng-container *ngFor="let data of listTemplate">
+        <app-view-ele-template *ngIf="!isGroup(data)" [data]="data" [scale]="scale"></app-view-ele-template>
+        <app-view-template-group *ngIf="isGroup(data)" [data]="data" [scale]="scale"></app-view-template-group>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+<form [formGroup]="formCheckIn" (ngSubmit)="submit()">
+  <input type="text" class='select-checkin' formControlName="qr" #checkin>
+</form>

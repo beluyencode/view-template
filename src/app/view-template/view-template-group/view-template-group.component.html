@@ -1,0 +1,23 @@
+<div class='view-ele' [style]="{
+    position: 'absolute',
+    cursor: 'pointer',
+   'line-break': 'anywhere'
+  }" #ele *ngIf="scale" [ngStyle]="{
+      display: data.hidden ? 'none' : 'block',
+      top: data.y  + '%',
+      left: data.x  + '%',
+      width: data.width ? data.width * scale  +'px' : 'auto',
+      height: data.height ? data.height * scale  +'px' : 'auto',
+      'z-index': data.zIndex
+    }">
+    <div class='view-ele-rev' [style]="{
+      position: 'relative',
+      width: '100%',
+      'white-space': 'pre-line',
+      height: '100%'
+    }">
+        <div class='view-group'>
+            <app-view-ele-template *ngFor="let item of data.data" [scale]="scale" [data]="item"></app-view-ele-template>
+        </div>
+    </div>
+</div>

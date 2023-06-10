@@ -1,1 +1,190 @@
-<p>view-ele-template works!</p>
+<div class='view-ele' [style]="{
+  position: 'absolute',
+  cursor: 'pointer',
+ 'line-break': 'anywhere'
+}" #ele *ngIf="scale && data.type === typeTemplate.TEXT" [ngStyle]="{
+    color: data.color,
+    'font-size': data.fontSize * scale +'px',
+    display: data.hidden ? 'none' : 'block',
+    top: data.y  + '%',
+    left: data.x  + '%',
+    'text-align': data.align,
+    'background-color': data.background,
+    width: data.width ? data.width * scale  +'px' : 'auto',
+    transform: 'rotate('+ data.rotate + 'deg'+')',
+    'border-radius': data.borderRadius* scale  + 'px',
+    'z-index': data.zIndex
+  }">
+  <div class='view-ele-rev' [style]="{
+    position: 'relative',
+    width: '100%',
+    'white-space': 'pre-line',
+    height: '100%'
+  }" [ngStyle]="{
+    padding: data.padding + 'px',
+    'font-weight': data.fontWeight,
+    'font-family': data.fontFamily
+  }">
+    {{data.content}}
+  </div>
+</div>
+
+<div class='view-ele' [style]="{
+  position: 'absolute',
+  cursor: 'pointer',
+ 'line-break': 'anywhere'
+}" #ele *ngIf="scale && data.type === typeTemplate.IMAGE" [ngStyle]="{
+    display: data.hidden ? 'none' : 'block',
+    top: data.y  + '%',
+    left: data.x  + '%',
+    width: data.width ? data.width * scale  +'px' : 'auto',
+    height: data.height ? data.height * scale  +'px' : 'auto',
+    transform: 'rotate('+ data.rotate + 'deg'+')',
+    'border-radius': data.borderRadius + 'px',
+    'z-index': data.zIndex
+  }">
+  <div class='view-ele-rev' [style]="{
+    position: 'relative',
+    width: '100%',
+    'white-space': 'pre-line',
+    height: '100%'
+  }">
+    <img [src]="data.url" [style]="{
+      width: '100%',
+      height: '100%'
+    }" [ngStyle]="{
+      'border-radius': data.borderRadius* scale  + 'px'
+    }" alt="" *ngIf="data.url !== ''">
+    <div class='view-img-empty' [ngStyle]="{
+      'border-radius': data.borderRadius + 'px'
+    }" *ngIf="data.url === ''">
+    </div>
+  </div>
+</div>
+
+<div class='view-ele' [style]="{
+  position: 'absolute',
+  cursor: 'pointer',
+ 'line-break': 'anywhere'
+}" #ele *ngIf="scale && data.type === typeTemplate.BACKGROUND" [ngStyle]="{
+    display: data.hidden ? 'none' : 'block',
+    top: data.y  + '%',
+    left: data.x  + '%',
+    width: data.width ? data.width * scale  +'px' : 'auto',
+    height: data.height ? data.height * scale  +'px' : 'auto',
+    transform: 'rotate('+ data.rotate + 'deg'+')',
+    'border-radius': data.borderRadius* scale  + 'px',
+    'background-color': data.background,
+    'z-index': data.zIndex
+  }">
+  <div class='view-ele-rev' [style]="{
+    position: 'relative',
+    width: '100%',
+    'white-space': 'pre-line',
+    height: '100%'
+  }">
+  </div>
+</div>
+
+<ng-container *ngIf="scale && data.type === typeTemplate.CHECK_IN" [ngSwitch]='data.checkInOptions[data.checkInOptions.activeType] 
+  && data.checkInOptions[data.checkInOptions.activeType].type 
+  ? data.checkInOptions[data.checkInOptions.activeType].type : null'>
+  <ng-container *ngSwitchCase="typeTemplate.TEXT">
+    <div class='view-ele' [style]="{
+      position: 'absolute',
+      cursor: 'pointer',
+     'line-break': 'anywhere'
+    }" [ngStyle]="{
+        color: data.checkInOptions[data.checkInOptions.activeType].color,
+        'font-size': data.checkInOptions[data.checkInOptions.activeType].fontSize * scale +'px',
+        display: data.checkInOptions[data.checkInOptions.activeType].hidden ? 'none' : 'block',
+        top: data.y  + '%',
+        left: data.x  + '%',
+        'text-align': data.checkInOptions[data.checkInOptions.activeType].align,
+        'background-color': data.checkInOptions[data.checkInOptions.activeType].background,
+        width: data.width ? data.checkInOptions[data.checkInOptions.activeType].width * scale  +'px' : 'auto',
+        transform: 'rotate('+ data.rotate + 'deg'+')',
+        'border-radius': data.checkInOptions[data.checkInOptions.activeType].borderRadius* scale  + 'px',
+        'z-index': data.zIndex
+      }">
+      <div class='view-ele-rev' [style]="{
+        position: 'relative',
+        width: '100%',
+        'white-space': 'pre-line',
+        height: '100%'
+      }" [ngStyle]="{
+        padding: data.checkInOptions[data.checkInOptions.activeType].padding + 'px',
+        'font-weight': data.checkInOptions[data.checkInOptions.activeType].fontWeight,
+        'font-family': data.checkInOptions[data.checkInOptions.activeType].fontFamily
+      }">
+        {{data.checkInOptions[data.checkInOptions.activeType] | dynamicValue}}
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="typeTemplate.IMAGE">
+    <div class='view-ele' [style]="{
+      position: 'absolute',
+      cursor: 'pointer',
+     'line-break': 'anywhere'
+    }" #ele [ngStyle]="{
+        display: data.checkInOptions[data.checkInOptions.activeType].hidden ? 'none' : 'block',
+        top: data.y  + '%',
+        left: data.x  + '%',
+        width: data.checkInOptions[data.checkInOptions.activeType].width ?  data.checkInOptions[data.checkInOptions.activeType].width * scale  +'px' : 'auto',
+        height: data.checkInOptions[data.checkInOptions.activeType].height ? data.checkInOptions[data.checkInOptions.activeType].height * scale  +'px' : 'auto',
+        transform: 'rotate('+ data.rotate + 'deg'+')',
+        'border-radius': data.checkInOptions[data.checkInOptions.activeType].borderRadius + 'px',
+        'z-index': data.zIndex
+      }">
+      <div class='view-ele-rev' [style]="{
+        position: 'relative',
+        width: '100%',
+        'white-space': 'pre-line',
+        height: '100%'
+      }">
+        <img [src]="data.url" [style]="{
+          width: '100%',
+          height: '100%'
+        }" [ngStyle]="{
+          'border-radius': data.checkInOptions[data.checkInOptions.activeType].borderRadius* scale  + 'px'
+        }" alt="" *ngIf="data.checkInOptions[data.checkInOptions.activeType].url !== ''">
+        <div class='view-img-empty' [ngStyle]="{
+          'border-radius': data.borderRadius + 'px'
+        }" *ngIf="data.checkInOptions[data.checkInOptions.activeType].url === ''">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="typeTemplate.BACKGROUND">
+    <div class='view-ele' [style]="{
+      position: 'absolute',
+      cursor: 'pointer',
+     'line-break': 'anywhere'
+    }" #ele [ngStyle]="{
+        display: data.checkInOptions[data.checkInOptions.activeType].hidden ? 'none' : 'block',
+        top: data.y  + '%',
+        left: data.x  + '%',
+        width: data.checkInOptions[data.checkInOptions.activeType].width ? data.checkInOptions[data.checkInOptions.activeType].width * scale  +'px' : 'auto',
+        height: data.checkInOptions[data.checkInOptions.activeType].height ? data.checkInOptions[data.checkInOptions.activeType].height * scale  +'px' : 'auto',
+        transform: 'rotate('+ data.rotate + 'deg'+')',
+        'border-radius': data.checkInOptions[data.checkInOptions.activeType].borderRadius* scale  + 'px',
+        'background-color': data.checkInOptions[data.checkInOptions.activeType].background,
+        'z-index': data.zIndex
+      }">
+      <div class='view-ele-rev' [style]="{
+        position: 'relative',
+        width: '100%',
+        'white-space': 'pre-line',
+        height: '100%'
+      }">
+
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+
+  </ng-container>
+</ng-container>
+<!-- 
+<app-create-template-view-group *ngIf="data.idGroup" [scale]="scale" [edit]='edit'
+  [data]="data"></app-create-template-view-group> -->
