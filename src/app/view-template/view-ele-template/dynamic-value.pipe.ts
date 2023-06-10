@@ -26,20 +26,16 @@ export class DynamicValuePipe implements PipeTransform {
 
   transform(value: TemplateCheckIn['notFound'] | TemplateCheckIn["checkedIn"] | TemplateCheckIn["checkIn"] | TemplateCheckIn['hidden'],
     ...args: unknown[]): unknown {
-    console.log(this.viewTemplateService.listValueDynamic);
     const findAttr = this.viewTemplateService.listValueDynamic.find((ele: any) => {
       return ele.value === value.content
     })
     if (findAttr) {
-      console.log(findAttr);
-
-      console.log(this.viewTemplateService.infoCheckIn);
-
-      console.log((findAttr.value as string).replace('{{', '').replace('}}', '').replace('\"]', '').split('["'));
-
-      const valueAttr = this.getAttr((findAttr.value as string).replace('{{', '').replace('}}', '').replace('\"]', '').split('["'),
-        this.viewTemplateService.infoCheckIn);
+      const arrAttr = (findAttr.value as string).replace('{{', '').replace('}}', '').replace('\"]', '').split('["');
+      const valueAttr = this.getAttr(arrAttr, this.viewTemplateService.infoCheckIn);
       if (valueAttr) {
+        if (arrAttr.includes('time_checkin')) {
+          return new Date(+valueAttr * 1000).toLocaleString();
+        }
         return valueAttr;
       }
       return '';
