@@ -2,6 +2,7 @@
 
 # Compiled output
 /dist
+/view-template-build
 /tmp
 /out-tsc
 /bazel-out
