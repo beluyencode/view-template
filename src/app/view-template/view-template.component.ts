@@ -24,6 +24,8 @@ export class ViewTemplateComponent implements OnInit, AfterViewInit {
   loading = false;
   idTemplate = '';
   formCheckIn: FormGroup;
+  prevCode = '';
+  prevTime = new Date();
 
   constructor(
     public viewTemplateService: ViewTemplateService,
@@ -174,9 +176,35 @@ export class ViewTemplateComponent implements OnInit, AfterViewInit {
 
   submit() {
     const arrCode = (this.formCheckIn.getRawValue().qr.split('/'));
-    this.viewTemplateService.checkin(arrCode[arrCode.length - 1] ?? '').subscribe({
-      error: (err: any) => console.log('123', err)
-    });
+    this.prevCode = this.formCheckIn.getRawValue().qr;
+    const countTime = new Date().getTime() - this.prevTime.getTime();
+    if (this.prevCode !== (arrCode[arrCode.length - 1] ?? '')) {
+      this.viewTemplateService.checkin(arrCode[arrCode.length - 1] ?? '').subscribe({
+        next: () => {
+          this.prevCode = arrCode[arrCode.length - 1] ?? '';
+          this.prevTime = new Date();
+        },
+        error: (err: any) => {
+          console.log('123', err);
+          this.prevTime = new Date();
+        },
+      });
+    } else {
+      if (countTime > 3000) {
+        this.viewTemplateService.checkin(arrCode[arrCode.length - 1] ?? '').subscribe({
+          next: () => {
+            this.prevCode = arrCode[arrCode.length - 1] ?? '';
+            this.prevTime = new Date();
+          },
+          error: (err: any) => {
+            console.log('123', err);
+            this.prevTime = new Date();
+          },
+        });
+      } else {
+        this.toastr.warning('Vui lòng quét chậm lại!')
+      }
+    }
     this.formCheckIn.patchValue({
       qr: ''
     });

@@ -23,9 +23,10 @@ export class ViewTemplateService {
   changeScaleScreen;
   id_event_device;
   subject: WebSocketSubject<any>;
-  event_id = 'evt_chk8ae223aks7397umqg';
-  device = '546869e1babf742062e1bb8b20316576745f63686b386165323233616b7337333937756d7167d41d8cd98f00b204e9800998ecf8427e';
-
+  event_id = 'evt_cj5rn1223aks73f6j8dg';
+  device = '546869e1babf742062e1bb8b20316576745f636a35726e31323233616b73373366366a386467d41d8cd98f00b204e9800998ecf8427e';
+  // event_id = '';
+  // device = '';
   constructor(
     private http: HttpClient
   ) {
