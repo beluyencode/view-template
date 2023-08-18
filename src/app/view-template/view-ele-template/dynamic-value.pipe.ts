@@ -1,15 +1,15 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
 import { ViewTemplateService } from '../view-template.service';
 import { TemplateCheckIn } from '../view-template';
 
 @Pipe({
-  name: 'dynamicValue'
+  name: 'dynamicValue',
+  pure: false
 })
 export class DynamicValuePipe implements PipeTransform {
 
-  constructor(private viewTemplateService: ViewTemplateService) {
-
-  }
+  constructor(private viewTemplateService: ViewTemplateService, private cd: ChangeDetectorRef
+  ) { }
 
   getAttr(attr: Array<string>, obj: any) {
     let value = obj;

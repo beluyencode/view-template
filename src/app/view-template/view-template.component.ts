@@ -176,9 +176,10 @@ export class ViewTemplateComponent implements OnInit, AfterViewInit {
 
   submit() {
     const arrCode = (this.formCheckIn.getRawValue().qr.split('/'));
-    this.prevCode = this.formCheckIn.getRawValue().qr;
     const countTime = new Date().getTime() - this.prevTime.getTime();
+
     if (this.prevCode !== (arrCode[arrCode.length - 1] ?? '')) {
+
       this.viewTemplateService.checkin(arrCode[arrCode.length - 1] ?? '').subscribe({
         next: () => {
           this.prevCode = arrCode[arrCode.length - 1] ?? '';

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { BackgroundTemplate, Template, TemplateGroup, TypeAction, apiUrl, checkInState } from './view-template';
 import { HttpClient } from '@angular/common/http';
@@ -9,6 +9,7 @@ export class ViewTemplateService {
   //data
   background: BackgroundTemplate = new BackgroundTemplate();
   listElement: Template[] = [];
+  rank: any = [];
   scaleDefault = 854;
   currentWidth = 0;
   currentHeight = 0;
@@ -22,13 +23,16 @@ export class ViewTemplateService {
   mouse_over_view;
   changeScaleScreen;
   id_event_device;
+  changView;
   subject: WebSocketSubject<any>;
-  event_id = 'evt_cj5rn1223aks73f6j8dg';
-  device = '546869e1babf742062e1bb8b20316576745f636a35726e31323233616b73373366366a386467d41d8cd98f00b204e9800998ecf8427e';
+  event_id = 'evt_cj5s7k223aks73f6j8gg';
+  device = '546869e1babf742062e1bb8b20316576745f636a3573376b323233616b73373366366a386767d41d8cd98f00b204e9800998ecf8427e';
   // event_id = '';
   // device = '';
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cd: ChangeDetectorRef
+
   ) {
     this.mouse_over_view = new BehaviorSubject<any>(false);
     this.changeScaleScreen = new BehaviorSubject<any>(null);
@@ -36,6 +40,7 @@ export class ViewTemplateService {
     // this.listElement = [...Array(5)].map((ele: any, index: number) => {
     //   return new Template('element' + index);
     // });
+    this.changView = new BehaviorSubject<any>(false);
     this.load_list_element = new BehaviorSubject<any>(this.listElement);
   }
 
@@ -60,6 +65,13 @@ export class ViewTemplateService {
   }
 
   getEvent() {
+    return this.http.get(apiUrl.origin + apiUrl.getEvent, {
+      params: {
+        id: this.event_id
+      }
+    })
+  }
+  getRank() {
     return this.http.get(apiUrl.origin + apiUrl.getEvent, {
       params: {
         id: this.event_id
