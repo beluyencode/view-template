@@ -104,6 +104,9 @@ export class ViewTemplateComponent implements OnInit, AfterViewInit {
             this.viewTemplateService.listQrValueDynamic = [{
               value: 'https://api.dev.qrclc.com/api/guest/qrcode/{{_id}}',
               label: 'QR code'
+            }, {
+              value: 'https://api.dev.qrclc.com/api/static/get?f={{event_id}}/{{num_order}}.{{event_id}}.jpg',
+              label: 'avatar'
             }];
 
             if (event?.data?.config?.background) {

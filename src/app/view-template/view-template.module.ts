@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ViewTemplateGroupComponent } from './view-template-group/view-template-group.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicValuePipe } from './view-ele-template/dynamic-value.pipe';
+import { DynamicValueImgPipe } from './view-ele-template/dynamic-value-img.pipe';
 
 
 
@@ -15,7 +16,8 @@ import { DynamicValuePipe } from './view-ele-template/dynamic-value.pipe';
     ViewTemplateComponent,
     ViewEleTemplateComponent,
     ViewTemplateGroupComponent,
-    DynamicValuePipe
+    DynamicValuePipe,
+    DynamicValueImgPipe
   ],
   imports: [
     CommonModule,

@@ -25,8 +25,8 @@ export class ViewTemplateService {
   id_event_device;
   changView;
   subject: WebSocketSubject<any>;
-  event_id = 'evt_cj5s7k223aks73f6j8gg';
-  device = '546869e1babf742062e1bb8b20316576745f636a3573376b323233616b73373366366a386767d41d8cd98f00b204e9800998ecf8427e';
+  event_id = 'evt_cji2sdq9io6s739p9la0';
+  device = '546869e1babf742062e1bb8b20316576745f636a693273647139696f367337333970396c6130d41d8cd98f00b204e9800998ecf8427e';
   // event_id = '';
   // device = '';
   constructor(
