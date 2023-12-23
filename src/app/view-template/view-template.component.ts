@@ -94,7 +94,11 @@ export class ViewTemplateComponent implements OnInit, AfterViewInit {
                 value: '{{time_checkin}}',
                 label: 'Thời gian check in'
               },
-              ...this.viewTemplateService.event.params_name.map((ele: string) => {
+              {
+                value: '{{email}}',
+                label: 'Email'
+              },
+              ...(this.viewTemplateService?.event?.params_name || []).map((ele: string) => {
                 return {
                   value: `{{params["${ele}"]}}`,
                   label: ele
@@ -105,7 +109,7 @@ export class ViewTemplateComponent implements OnInit, AfterViewInit {
               value: 'https://api.dev.qrclc.com/api/guest/qrcode/{{_id}}',
               label: 'QR code'
             }, {
-              value: 'https://api.dev.qrclc.com/api/static/get?f={{event_id}}/{{num_order}}.{{event_id}}.jpg',
+              value: 'https://api.dev.qrclc.com/static/get?f={{event_id}}/{{num_order}}.{{event_id}}.jpg',
               label: 'avatar'
             }];
 

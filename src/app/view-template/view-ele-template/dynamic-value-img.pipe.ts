@@ -41,7 +41,7 @@ export class DynamicValueImgPipe implements PipeTransform {
             console.log(newUrl);
             return newUrl
         }
-        return '';
+        return value.url || "";
     }
 
 }
