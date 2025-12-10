@@ -182,14 +182,14 @@ export class ViewTemplateComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-    const arrCode = (this.formCheckIn.getRawValue().qr.split('/'));
+    const arrCode = this.formCheckIn.getRawValue().qr;
     const countTime = new Date().getTime() - this.prevTime.getTime();
 
-    if (this.prevCode !== (arrCode[arrCode.length - 1] ?? '')) {
+    if (this.prevCode !== (arrCode ?? '')) {
 
-      this.viewTemplateService.checkin(arrCode[arrCode.length - 1] ?? '').subscribe({
+      this.viewTemplateService.checkin(arrCode ?? '').subscribe({
         next: () => {
-          this.prevCode = arrCode[arrCode.length - 1] ?? '';
+          this.prevCode = arrCode ?? '';
           this.prevTime = new Date();
         },
         error: (err: any) => {
@@ -199,9 +199,9 @@ export class ViewTemplateComponent implements OnInit, AfterViewInit {
       });
     } else {
       if (countTime > 3000) {
-        this.viewTemplateService.checkin(arrCode[arrCode.length - 1] ?? '').subscribe({
+        this.viewTemplateService.checkin(arrCode ?? '').subscribe({
           next: () => {
-            this.prevCode = arrCode[arrCode.length - 1] ?? '';
+            this.prevCode = arrCode ?? '';
             this.prevTime = new Date();
           },
           error: (err: any) => {

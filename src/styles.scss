@@ -9,6 +9,40 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+@font-face {
+    font-family: 'Gill Sans MT Pro';
+    src: url('assets/GillSansMTPro-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gill Sans MT Pro';
+    src: url('assets/GillSansMTPro-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'MMC';
+    src: url('assets/MMC-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MMC';
+    src: url('assets/MMC-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 ::-webkit-scrollbar {
     width: 0px;
     height: 5px;
